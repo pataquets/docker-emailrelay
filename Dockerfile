@@ -1,0 +1,20 @@
+FROM pataquets/ubuntu:trusty
+
+RUN \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get -y install \
+      wget \
+  && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN \
+  wget -O /tmp/emailrelay.deb \
+    http://sourceforge.net/projects/emailrelay/files/emailrelay/1.9/emailrelay_1.9_amd64.deb/download && \
+  DEBIAN_FRONTEND=noninteractive \
+    dpkg -i /tmp/emailrelay.deb && \
+  rm -v /tmp/emailrelay.deb
+
+ENTRYPOINT [ "emailrelay", "--no-daemon", "--no-syslog", "--log-file=/dev/stdout" ]
+CMD [ "--help", "--verbose" ]
