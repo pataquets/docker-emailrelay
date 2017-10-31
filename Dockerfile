@@ -4,13 +4,13 @@ RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
     apt-get -y install \
-      wget \
+      curl \
   && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 RUN \
-  wget -O /tmp/emailrelay.deb \
+  curl --fail --location -o /tmp/emailrelay.deb \
     http://sourceforge.net/projects/emailrelay/files/emailrelay/1.9/emailrelay_1.9_amd64.deb/download && \
   DEBIAN_FRONTEND=noninteractive \
     dpkg -i /tmp/emailrelay.deb && \
