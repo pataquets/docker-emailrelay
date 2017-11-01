@@ -10,7 +10,7 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 RUN \
-  curl --fail --location -o /tmp/emailrelay.deb \
+  curl --fail --location --silent --show-error -o /tmp/emailrelay.deb \
     http://sourceforge.net/projects/emailrelay/files/emailrelay/1.9/emailrelay_1.9_amd64.deb/download && \
   DEBIAN_FRONTEND=noninteractive \
     dpkg -i /tmp/emailrelay.deb && \
